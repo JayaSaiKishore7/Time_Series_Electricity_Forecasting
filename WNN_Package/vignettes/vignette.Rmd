@@ -1,0 +1,23 @@
+---
+title: "WNN Forecast Example"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{WNN Forecast Example}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## Introduction
+
+This vignette demonstrates how to use the WNNForecast package
+to perform time series forecasting.
+
+```{r}
+library(WNNForecast)
+
+set.seed(123)
+series <- rnorm(200)
+
+forecast <- wnn_forecast(series, k = 5, h = 10, l = 5)
+
+forecast
