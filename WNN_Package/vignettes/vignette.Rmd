@@ -1,5 +1,5 @@
 ---
-title: "WNN Forecast Example"
+title: "Weighted Nearest Neighbours Forecasting"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{WNN Forecast Example}
@@ -7,17 +7,48 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-## Introduction
+# Introduction
 
 This vignette demonstrates how to use the WNNForecast package
-to perform time series forecasting.
+for time series forecasting.
+
+# Load package
 
 ```{r}
 library(WNNForecast)
 
+
+
 set.seed(123)
-series <- rnorm(200)
+series <- sin(1:400/10) + rnorm(400,0,0.1)
 
-forecast <- wnn_forecast(series, k = 5, h = 10, l = 5)
+model <- wnn_fit(series, lag = 20, k = 5)
+pred  <- wnn_forecast(model, h = 20)
 
-forecast
+pred
+
+
+
+
+library(readxl)
+
+data <- read_excel("Elec-train.xlsx")
+series <- data$Power_kW
+
+model <- wnn_fit(series, lag = 96, k = 10)
+pred  <- wnn_forecast(model, h = 96)
+
+head(pred)
+
+
+
+
+ts.plot(c(tail(series,200), pred),
+        col=c(rep(1,200), rep(2,96)),
+        lty=c(rep(1,200), rep(2,96)),
+        main="WNN Electricity Forecast")
+
+legend("topleft",
+       legend=c("Observed","Forecast"),
+       col=c(1,2),
+       lty=c(1,2))
