@@ -1,4 +1,4 @@
-# Time Series Electricity Forecasting + WNN R Package
+## Time Series Electricity Forecasting + WNN R Package
 
 End-to-end time series forecasting project combining machine learning (Python) and a research-paper algorithm implemented as an R package.
 
