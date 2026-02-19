@@ -51,7 +51,7 @@ Statistical Models
 
 - SARIMA
 
-Machine Learning Models
+Machine Learning Models:
 
 - Random Forest
 
