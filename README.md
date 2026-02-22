@@ -93,7 +93,7 @@ JayaSaiKishore.xlsx
 
 # Part 2 — Weighted Nearest Neighbours (WNN)
 
-This part implements the research paper:
+This part implements the research papers:
 
 Talavera-Llames et al., 2016 — A Nearest Neighbours-Based Algorithm for Big Time Series Forecasting
 
