@@ -79,10 +79,23 @@ Features created:
 
 # Model Selection
 
-All models were tuned and evaluated using TimeSeriesSplit cross-validation.
+All models were tuned and evaluated using TimeSeriesSplit cross-validation (mean absolute error, kW):
 
-Best model: Random Forest
-Chosen for stability and lowest validation error.
+| Model | Validation MAE | Cross-validation |
+|---|---|---|
+| SVR | 6.80 | 5 folds |
+| MLP | 7.10 | 5 folds |
+| LSTM | 9.42 | 3 folds |
+| Random Forest | 10.59 | 3 folds, 2-day test windows |
+| XGBoost | 10.81 | 3 folds, 2-day test windows |
+| Exponential Smoothing | 11.74 | 5 folds |
+| SARIMA | 15.96 | 5 folds |
+
+The models were not all scored on the same folds, so these numbers are not directly comparable: Random Forest
+and XGBoost were validated on 2-day windows, while SVR and MLP used 5 default-sized folds.
+
+Final model: Random Forest (max depth 15, 200 trees), refit on the full series and used to produce the 96-step
+forecast recursively.
 
 Final forecast saved as:
  ```
