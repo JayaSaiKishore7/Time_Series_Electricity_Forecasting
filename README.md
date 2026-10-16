@@ -160,20 +160,25 @@ library(WNNForecast)
  ```
 
  ```
-model <- wnn_fit(series, lag_window = 96, k = 10)
+model <- wnn_fit(series, lag = 96, k = 10)
 forecast <- wnn_forecast(model, h = 96)
 
  ```
 
 # Results
 
-Comparison between Random Forest and WNN:
+WNN (window 96, k = 10) compared with the Random Forest forecast for 19 Feb 2010, in kW. No measurements exist
+for that day, so this shows how closely the two forecasts agree, not how accurate either one is:
 
-Metric	Value
-MAE	5.32
-RMSE	13.14
+| Metric | WNN vs Random Forest |
+|---|---|
+| MAE | 7.24 |
+| RMSE | 10.24 |
 
-WNN produced forecasts very close to the machine learning model while remaining simple and interpretable.
+Accuracy check: forecasting the last 24 measured hours (96 steps) from everything before them, WNN scores
+MAE 29.42 and RMSE 54.89 kW against the measured values. This is a single day, so it is only a rough indication.
+
+The WNN forecast is saved in `wnn_forecast.csv`.
 
 
 # Project Deliverables

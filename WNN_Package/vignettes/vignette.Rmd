@@ -33,7 +33,7 @@ pred
 library(readxl)
 
 data <- read_excel("Elec-train.xlsx")
-series <- data$Power_kW
+series <- as.numeric(na.omit(data[["Power (kW)"]]))
 
 model <- wnn_fit(series, lag = 96, k = 10)
 pred  <- wnn_forecast(model, h = 96)

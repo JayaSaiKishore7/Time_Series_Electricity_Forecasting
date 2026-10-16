@@ -23,7 +23,10 @@ create_embedding <- function(series, lag) {
 #' @export
 wnn_fit <- function(series, lag = 96, k = 10) {
   emb <- create_embedding(series, lag)
-  model <- list(X = emb$X, y = emb$y, lag = lag, k = k)
+  # last_window: the final `lag` observations, the starting point for forecasting.
+  # The last row of X stops one value short of the end of the series.
+  model <- list(X = emb$X, y = emb$y, lag = lag, k = k,
+                last_window = tail(series, lag))
   class(model) <- "wnn_model"
   model
 }
@@ -44,7 +47,7 @@ predict_next <- function(window, model) {
 #' @param h Forecast horizon
 #' @export
 wnn_forecast <- function(model, h = 96) {
-  window <- model$X[nrow(model$X), ]
+  window <- model$last_window
   preds <- numeric(h)
   
   for (i in 1:h) {
