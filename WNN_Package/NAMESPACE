@@ -1,1 +1,2 @@
+export(wnn_fit)
 export(wnn_forecast)
